@@ -1,0 +1,45 @@
+Exercise 9
+
+1)
+
+Create an nginx pod with a liveness probe that just runs the command 'ls'. Save its YAML in pod.yaml. Run it, check its probe status, delete it.
+
+Modify the pod.yaml file so that liveness probe starts kicking in after 5 seconds whereas the interval between probes would be 5 seconds. Run it, check the probe, delete it.
+
+Create an nginx pod (that includes port 80) with an HTTP readinessProbe on path '/' on port 80. Again, run it, check the readinessProbe, delete it.
+
+Logging
+
+Create a busybox pod that runs 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done'. Check its logs
+
+Debugging
+
+Create a busybox pod that runs 'ls /notexist'. Determine if there's an error (of course there is), see it. In the end, delete the pod
+
+Create a busybox pod that runs 'notexist'. Determine if there's an error (of course there is), see it. In the end, delete the pod forcefully with a 
+0 grace period
+
+Get CPU/memory utilization for nodes (metrics-server must be running)
+
+
+
+2)
+
+In this exercise, you will create a Pod running a NodeJS application. The Pod will define readiness and liveness probes with different parameters.
+
+Defining a Pod’s Readiness and Liveness Probe
+
+Create a new Pod named hello with the image bmuschko/nodejs-hello-world:1.0.0 that exposes the port 3000. Provide the name nodejs-port for the container port.
+Add a Readiness Probe that checks the URL path / on the port referenced with the name nodejs-port after a 2 seconds delay. You do not have to define the period 
+interval.
+Add a Liveness Probe that verifies that the app is up and running every 8 seconds by checking the URL path / on the port referenced with the name nodejs-port. 
+The probe should start with a 5 seconds delay.Shell into container and curl localhost:3000. Write down the output. Exit the container.
+Retrieve the logs from the container. Write down the output.
+
+
+
+3)
+
+Create a POD that is running two container as side car container. The first container is running NGINX on web server port 80. The second is running bussy 
+box container ie running sleep 3600 command. ENsure that busybox xontainer is only started once the NGINX server is started.
+
