@@ -43,3 +43,33 @@ Retrieve the logs from the container. Write down the output.
 Create a POD that is running two container as side car container. The first container is running NGINX on web server port 80. The second is running bussy 
 box container ie running sleep 3600 command. ENsure that busybox xontainer is only started once the NGINX server is started.
 
+
+4)
+
+Create a new Pod with the following YAML.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: failing-pod
+  name: failing-pod
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - while true; do echo $(date) >> ~/tmp/curr-date.txt; sleep
+      5; done;
+    image: busybox
+    name: failing-pod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+
+Check the Pod's status. Do you see any issue?
+Follow the logs of the running container and identify an issue.
+Fix the issue by shelling into the container. After resolving the issue the current date should be written to a file. Render the output.
